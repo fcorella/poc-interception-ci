@@ -1,0 +1,41 @@
+console.log("sw.js is being downloaded");
+
+self.addEventListener('install', (event) => {});
+
+self.addEventListener('activate', (event) => {});
+
+self.addEventListener('fetch', (event) => {
+    if (event.request.method === 'POST' && event.request.headers.get('Content-Type') === 'application/x-www-form-urlencoded') {
+	event.respondWith((async () => {
+	    try {
+		const body = await event.request.text();
+		const params = new URLSearchParams(body);
+		const challenge = params.get('challenge');
+		const callbackURL = params.get('callbackURL');
+		return new Response(
+		    "<p>Post request received from service worker with " +
+		    `challenge [${challenge}] and callbackURL [${callbackURL}]</p>`,
+		    {
+			status: 200,
+			headers: {
+			    'Content-Type': 'text/html',
+			    'access-control-allow-origin': '*'
+			}
+		    });
+	    } catch (error) {
+		console.error('Error parsing form data:', error);
+		return new Response('Error processing data', { status: 500 });
+	    }
+	})());
+    }
+    else {
+	event.respondWith(
+            new Response("<p>A non-standard request was intercepted by the service worker</p>", {
+		headers: {
+	            'Content-Type': 'text/html',
+		    'access-control-allow-origin': '*'
+		}
+	    })
+	)
+    }
+});

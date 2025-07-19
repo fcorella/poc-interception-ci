@@ -1,0 +1,12 @@
+{
+  "type": "module",
+  "name": "credential-issuer-of-replication-demo",
+  "version": "1.0.0",
+  "description": "Credential issuer of the Automated Credential Replication Demo",
+  "main": "demo.mjs",
+  "dependencies": {
+    "body-parser": "^2.2.0",
+    "express": "^5.1.0",
+    "express-handlebars": "^8.0.3"
+  }
+}

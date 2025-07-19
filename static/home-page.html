@@ -1,0 +1,28 @@
+<html>
+<head>
+<script>    
+const registerServiceWorker = async (url) => {
+  if ('serviceWorker' in navigator) {
+    try {
+      const registration = await navigator.serviceWorker.register(url);
+    } catch (error) {
+      console.error(`Registration failed with ${error}`);
+    }
+  }
+};
+</script>
+</head>
+
+<body>
+<div style="text-align: center; margin-left: auto; margin-right: auto;">
+
+<p><strong>This is the home page of the credential issuer</strong></p>
+
+<p>
+<br/>
+<button type="button" onclick="registerServiceWorker('sw.js')">Register sw.js as service worker</button>
+</p>
+
+</div>
+</body>
+</html>
