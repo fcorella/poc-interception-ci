@@ -3,14 +3,17 @@
 <head>
 <script>    
   const registerServiceWorker = async (url, scope) => {
-  if ('serviceWorker' in navigator) {
-    try {
-	const registration = await navigator.serviceWorker.register(url, {scope: scope});
-    } catch (error) {
-      console.error(`Registration failed with ${error}`);
+    if ('serviceWorker' in navigator) {
+      try {
+  	const registration = await navigator.serviceWorker.register(url, {scope: scope});
+      } catch (error) {
+        console.error(`Registration failed with ${error}`);
+      }
     }
-  }
-};
+  };
+  function disableButton(button) {
+  button.disabled = true;
+}
 </script>
 </head>
 
@@ -21,7 +24,7 @@
 
 <p>
 <br/>
-<button type="button" onclick="registerServiceWorker('sw.js', '/presentation-request')">Register sw.js as service worker</button>
+<button type="button" onclick="registerServiceWorker('sw.js', '/presentation-request'); disableButton(this)">Register sw.js as service worker</button>
 </p>
 
 </div>
